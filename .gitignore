@@ -1,0 +1,7 @@
+*.o
+*.exe
+*.com
+*.out
+*.log
+build/
+my_notes.txt
