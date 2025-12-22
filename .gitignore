@@ -1,7 +1,9 @@
+#build outputs
 *.o
 *.exe
 *.com
 *.out
 *.log
-build/
+
+#extras
 my_notes.txt
