@@ -1,30 +1,17 @@
 #define Library
 #include "osapi.h"
 
-/*
-NOTES:
-In every Unix-like OS (Linux, macOS, Cygwin, WSL, etc.), file descriptors 0, 1, and 2 are reserved and always open.
-1) 0 = stdin = standard input : When you call read(0, ...), you are reading from keyboard.
-2) 1 = stdout = standard output : write(1, "hello\n", 6);  // prints to screen
-3) 2 = stderr (standard error) : File descriptor 2 is error output (also printed to terminal, but separate stream).
-
-but in our OS we will change those conventions
-*/
 
 private fd fds[256]; //file descriptors can be 2^8 as fd is int8 type 
 
-/*
-fd=0 -> error
-fd=1 -> stdin
-fd=2 ->stdout
-*/
 
 
-private bool isopen(fd file){ //no lowlevel os rn so need to invoke a system call to check if file open or not
+
+private bool isopen(fd file){ //check if valid AND open
     signed int posixfd;
-    struct stat _;
+    struct stat _;//just need a dummy container
 
-    if(file<3)
+    if(file<3) //not managed by our OS , 0,1,2 are open in the host OS, but they are NOT considered “open” by our OS API so our fds start with 3
         return false;
 
     posixfd = getposixfd(file);
@@ -32,7 +19,7 @@ private bool isopen(fd file){ //no lowlevel os rn so need to invoke a system cal
     if(posixfd==0) 
         return false;
     
-    if ((fstat(posixfd, &_))==-1) return false;
+    if ((fstat(posixfd, &_))==-1) return false;//fill this structure with info about this fd
 
     return true;
     
