@@ -18,12 +18,13 @@ typedef int8 error;
 #define $c (char *)
 #define $i (int)
 
+//global error lang for OS
 #define ErrNoErr 0
 #define ErrInit  1
 #define ErrIO    4
 #define ErrBadFD 8
 
-#define public __attribute__((visibility("default"))) //means imported
+#define public __attribute__((visibility("default"))) 
 #define private static
 
 //a loop just to write multiple statements
