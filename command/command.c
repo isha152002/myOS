@@ -6,7 +6,8 @@ int main(int argc, char*argv[]){
     init();
 
     c=store((int8)0);
-    printf("c=0x%.02hhx\n", $i c);
+    printf("ASCII VALUE =%d\n", $i c);
+    printf("HEX VALUE =0x%.02hhx\n", $i c);
     printf("errornumber=0x%.02hhx\n", $i errnumber);
 
 
